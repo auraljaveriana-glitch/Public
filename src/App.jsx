@@ -30,7 +30,7 @@ export default function App() {
   const [fechaSel, setFechaSel] = useState(HOY)
   const [horarioSel, setHorarioSel] = useState(null)
 
-  const [form, setForm] = useState({ nombre: '', telefono: '', motivo: '' })
+  const [form, setForm] = useState({ nombre: '', telefono: '', correo: '', eps: '', motivo: '' })
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
   const [citaConfirmada, setCitaConfirmada] = useState(false)
@@ -94,8 +94,8 @@ export default function App() {
   async function enviarReserva(e) {
     e.preventDefault()
     setError('')
-    if (!form.nombre || !form.telefono) {
-      setError('Completa tu nombre y teléfono para continuar.')
+    if (!form.nombre || !form.telefono || !form.eps) {
+      setError('Completa tu nombre, teléfono y EPS para continuar.')
       return
     }
     setCargando(true)
@@ -107,6 +107,8 @@ export default function App() {
       p_nombre: form.nombre,
       p_telefono: form.telefono,
       p_motivo: form.motivo || null,
+      p_email: form.correo || null,
+      p_eps: form.eps,
     })
     setCargando(false)
     if (error) {
@@ -277,6 +279,27 @@ export default function App() {
                       placeholder="573001234567"
                       value={form.telefono}
                       onChange={(e) => setForm({ ...form, telefono: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="correo">Correo (opcional)</label>
+                    <input
+                      id="correo"
+                      type="email"
+                      placeholder="tucorreo@ejemplo.com"
+                      value={form.correo}
+                      onChange={(e) => setForm({ ...form, correo: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="eps">EPS</label>
+                    <input
+                      id="eps"
+                      type="text"
+                      placeholder="Ej: Sura, Nueva EPS, Sanitas"
+                      value={form.eps}
+                      onChange={(e) => setForm({ ...form, eps: e.target.value })}
                       required
                     />
                   </div>
