@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
-import Waveform from './components/Waveform'
 
 const HOY = new Date().toISOString().slice(0, 10)
 const MAX_FECHA = new Date(Date.now() + 60 * 86400000).toISOString().slice(0, 10)
@@ -124,7 +123,7 @@ export default function App() {
     <div className="wizard-shell">
       <div className="wizard-card">
         <div className="wizard-header">
-          <Waveform width={120} height={18} />
+          <img src="/logo-aural.png" alt="Aural Centros Auditivos" style={{ height: 44, marginBottom: 6 }} />
           <h1>Agenda tu cita en Aural</h1>
           <p>Elige sede, profesional y el horario que más te sirva.</p>
         </div>
