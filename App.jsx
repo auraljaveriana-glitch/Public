@@ -29,7 +29,7 @@ export default function App() {
   const [fechaSel, setFechaSel] = useState(HOY)
   const [horarioSel, setHorarioSel] = useState(null)
 
-  const [form, setForm] = useState({ nombre: '', telefono: '', correo: '', eps: '', motivo: '' })
+  const [form, setForm] = useState({ nombre: '', telefono: '', correo: '', eps: '', cedula: '', motivo: '' })
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
   const [citaConfirmada, setCitaConfirmada] = useState(false)
@@ -93,8 +93,8 @@ export default function App() {
   async function enviarReserva(e) {
     e.preventDefault()
     setError('')
-    if (!form.nombre || !form.telefono || !form.eps) {
-      setError('Completa tu nombre, teléfono y EPS para continuar.')
+    if (!form.nombre || !form.telefono || !form.eps || !form.cedula) {
+      setError('Completa tu nombre, teléfono, cédula y EPS para continuar.')
       return
     }
     setCargando(true)
@@ -108,6 +108,7 @@ export default function App() {
       p_motivo: form.motivo || null,
       p_email: form.correo || null,
       p_eps: form.eps,
+      p_documento: form.cedula,
     })
     setCargando(false)
     if (error) {
@@ -289,6 +290,18 @@ export default function App() {
                       placeholder="tucorreo@ejemplo.com"
                       value={form.correo}
                       onChange={(e) => setForm({ ...form, correo: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="cedula">Cédula</label>
+                    <input
+                      id="cedula"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="1234567890"
+                      value={form.cedula}
+                      onChange={(e) => setForm({ ...form, cedula: e.target.value.replace(/[^0-9]/g, '') })}
+                      required
                     />
                   </div>
                   <div className="form-row">
