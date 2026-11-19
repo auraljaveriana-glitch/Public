@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { supabase } from './supabaseClient'
 
 const ORDEN_CIUDADES = ['bogota', 'cali', 'medellin', 'cartagena', 'barranquilla']
@@ -135,6 +135,26 @@ export default function App() {
   const [error, setError] = useState('')
   const [citaConfirmada, setCitaConfirmada] = useState(false)
 
+  // Flechas atrás/adelante del navegador
+  const estadoRef = useRef({})
+  estadoRef.current = { sedeSel, audiologoSel, fechaSel, horarioSel, citaConfirmada }
+  useEffect(() => {
+    window.history.replaceState({ paso: 1 }, '')
+    function alCambiarHistorial(e) {
+      const s = estadoRef.current
+      if (s.citaConfirmada) { limpiarTodo(); return }
+      let n = e.state?.paso ?? 1
+      // No dejar entrar a un paso para el que faltan datos (por ejemplo tras recargar)
+      if (n >= 2 && !s.sedeSel) n = 1
+      if (n >= 3 && !s.audiologoSel) n = 2
+      if (n >= 4 && !(s.fechaSel && s.horarioSel)) n = 3
+      setError('')
+      setPaso(n)
+    }
+    window.addEventListener('popstate', alCambiarHistorial)
+    return () => window.removeEventListener('popstate', alCambiarHistorial)
+  }, [])
+
   // Paso 1: sedes activas
   useEffect(() => {
     supabase.from('sedes').select('*').eq('activa', true).order('nombre')
@@ -195,9 +215,11 @@ export default function App() {
   const manana = horariosVisibles.filter((h) => h.hora_inicio < '12:00')
   const tarde = horariosVisibles.filter((h) => h.hora_inicio >= '12:00')
 
+  // Cada paso se guarda en el historial del navegador: las flechas atrás/adelante de la página funcionan
   function irAPaso(n) {
     setError('')
     setPaso(n)
+    window.history.pushState({ paso: n }, '')
   }
 
   function elegirSede(sede) {
@@ -225,10 +247,10 @@ export default function App() {
   }
 
   function volver() {
-    if (paso > 1) irAPaso(paso - 1)
+    window.history.back()
   }
 
-  function reiniciar() {
+  function limpiarTodo() {
     setPaso(1)
     setSedeSel(null)
     setAudiologoSel(null)
@@ -238,6 +260,11 @@ export default function App() {
     setForm({ nombre: '', telefono: '', correo: '', cedula: '', eps: '', motivo: '' })
     setCitaConfirmada(false)
     setError('')
+  }
+
+  function reiniciar() {
+    limpiarTodo()
+    window.history.pushState({ paso: 1 }, '')
   }
 
   async function enviarReserva(e) {
@@ -267,6 +294,7 @@ export default function App() {
       if (tomado) {
         // Volver a elegir hora con la lista actualizada
         setPaso(3)
+        window.history.replaceState({ paso: 3 }, '')
         setRefrescar((n) => n + 1)
       }
       return
@@ -298,6 +326,7 @@ export default function App() {
                 <p className="confirmacion-detalle">
                   <strong>{audiologoSel.nombre}</strong><br />
                   {sedeSel.nombre}<br />
+                  {sedeSel.direccion && <>{sedeSel.direccion}<br /></>}
                   {fechaCorta(fechaSel)} · {horaCompacta(horarioSel.hora_inicio)}
                 </p>
                 <p className="subtitulo">Te vamos a confirmar por WhatsApp al número que registraste.</p>
@@ -340,7 +369,8 @@ export default function App() {
                               <div className="sedes-lista">
                                 {g.sedes.map((s) => (
                                   <button key={s.id} type="button" className="sede-btn" onClick={() => elegirSede(s)}>
-                                    {s.nombre}
+                                    <span>{s.nombre}</span>
+                                    {s.direccion && <small>{s.direccion}</small>}
                                   </button>
                                 ))}
                               </div>
@@ -437,7 +467,10 @@ export default function App() {
                       </div>
                       <div className="resumen-col">
                         <small>Lugar</small>
-                        <span>{sedeSel.nombre}</span>
+                        <span>
+                          {sedeSel.nombre}
+                          {sedeSel.direccion && <i className="dir">{sedeSel.direccion}</i>}
+                        </span>
                       </div>
                     </div>
 
