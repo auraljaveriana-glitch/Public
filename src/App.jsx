@@ -1,13 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from './supabaseClient'
 
-// ── Enlaces del menú superior (cámbialos por las URLs reales del sitio de Aural) ──
-const NAV_LINKS = [
-  { texto: 'Nosotros', href: '#' },
-  { texto: 'Servicios', href: '#' },
-  { texto: 'Audífonos', href: '#' },
-]
-
 const ORDEN_CIUDADES = ['bogota', 'cali', 'medellin', 'cartagena', 'barranquilla']
 const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 const MESES_CORTOS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
@@ -285,17 +278,6 @@ export default function App() {
 
   return (
     <div className="pagina">
-      {/* ── Encabezado ── */}
-      <header className="encabezado">
-        <a className="encabezado-logo" href="#" onClick={(e) => { e.preventDefault(); reiniciar() }}>
-          <img src="/logo-aural.png" alt="Aural Centros Auditivos" />
-        </a>
-        <nav className="encabezado-nav" aria-label="Principal">
-          {NAV_LINKS.map((l) => <a key={l.texto} href={l.href}>{l.texto}</a>)}
-        </nav>
-        <button className="btn-cabecera" type="button" onClick={reiniciar}>Agenda tu cita</button>
-      </header>
-
       <main className="principal">
         {/* ── Panel izquierdo ── */}
         <section className="hero" aria-hidden="true">
