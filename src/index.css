@@ -46,7 +46,7 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   overflow: hidden;
   background: var(--navy);
   color: #fff;
-  padding: clamp(48px, 8.8vw, 170px) clamp(24px, 6.5vw, 124px) 48px;
+  padding: clamp(40px, 7vw, 130px) clamp(24px, 5.5vw, 100px) 48px;
 }
 .hero::before,
 .hero::after {
@@ -71,7 +71,7 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: clamp(44px, 5.7vw, 110px);
+  font-size: clamp(40px, 4.6vw, 86px);
   line-height: 0.98;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -79,10 +79,10 @@ button:focus-visible, input:focus-visible, a:focus-visible {
 .hero h1 span { font-weight: 300; letter-spacing: 0; }
 
 /* ───────── Panel derecho ───────── */
-.contenido { padding: clamp(32px, 4.3vw, 82px) clamp(20px, 3vw, 60px) 80px; }
+.contenido { padding: clamp(28px, 3vw, 56px) clamp(20px, 3vw, 56px) 48px; }
 .contenido-interno {
   max-width: 800px;
-  margin-left: clamp(0px, 7vw, 184px);
+  margin-left: clamp(0px, 5vw, 120px);
 }
 
 .pasos-barra {
@@ -90,11 +90,11 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   align-items: center;
   justify-content: space-between;
   min-height: 40px;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 .puntos { display: flex; align-items: center; gap: 14px; }
-.punto { width: 14px; height: 14px; border-radius: 50%; background: var(--gris-claro); transition: all 0.2s; }
-.punto.activo { width: 28px; height: 28px; background: var(--navy); }
+.punto { width: 12px; height: 12px; border-radius: 50%; background: var(--gris-claro); transition: all 0.2s; }
+.punto.activo { width: 24px; height: 24px; background: var(--navy); }
 .btn-volver {
   background: transparent;
   border: 1px solid var(--navy);
@@ -109,11 +109,11 @@ button:focus-visible, input:focus-visible, a:focus-visible {
 
 h2 {
   margin: 0;
-  font-size: clamp(26px, 2.3vw, 38px);
+  font-size: clamp(22px, 1.8vw, 30px);
   font-weight: 700;
   line-height: 1.15;
 }
-.subtitulo { margin: 8px 0 0 20px; font-size: clamp(16px, 1.25vw, 22px); font-weight: 400; }
+.subtitulo { margin: 6px 0 0 18px; font-size: clamp(14px, 1.05vw, 18px); font-weight: 400; }
 
 .error-box {
   background: var(--error-tint);
@@ -127,7 +127,7 @@ h2 {
 .estado-vacio, .nota { margin: 24px 0 0; font-size: 15px; color: var(--gris); }
 
 /* ───────── Paso 1: sedes ───────── */
-.acordeon { margin-top: 56px; }
+.acordeon { margin-top: 28px; }
 .acordeon-item { border-bottom: 1px solid var(--linea); margin: 0 8px 0 26px; }
 .acordeon-item.abierto { border-bottom: 0; margin: 0 0 0 -6px; }
 
@@ -138,8 +138,8 @@ h2 {
   justify-content: space-between;
   background: transparent;
   border: 0;
-  padding: 44px 0 44px 0;
-  font-size: 15px;
+  padding: 22px 0;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-align: left;
@@ -147,8 +147,8 @@ h2 {
 .acordeon-item.abierto .acordeon-cabecera {
   background: var(--navy);
   color: #fff;
-  border-radius: 22px 0 0 0;
-  padding: 14px 30px;
+  border-radius: 18px 0 0 0;
+  padding: 11px 26px;
 }
 .acordeon-item:not(.abierto) .acordeon-cabecera { padding-left: 0; }
 
@@ -156,24 +156,33 @@ h2 {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: start;
-  margin: 18px 0 30px 62px;
+  margin: 10px 0 16px 48px;
   border-bottom: 1px solid var(--linea);
-  padding-bottom: 30px;
+  padding-bottom: 16px;
 }
 .sede-btn {
   background: transparent;
   border: 0;
-  padding: 8px 28px 8px 28px;
-  font-size: 15px;
+  padding: 6px 20px;
+  font-size: 14px;
+  align-self: start;
   font-weight: 400;
   text-align: left;
   white-space: nowrap;
 }
-.sede-btn:hover { font-weight: 600; text-decoration: underline; text-underline-offset: 5px; }
-.sede-btn:not(:nth-child(3n+1)) { border-left: 2px solid var(--navy); }
+.sede-btn { border-radius: 999px; transition: background 0.15s, color 0.15s; }
+.sede-btn:hover, .sede-btn:focus-visible { background: var(--navy); color: #fff; }
+.sede-btn span { display: block; }
+.sede-btn small { display: block; max-width: 210px; margin-top: 2px; font-size: 11.5px; line-height: 1.3; white-space: normal; opacity: 0.75; }
+.sede-btn:hover small, .sede-btn:focus-visible small { opacity: 0.9; }
+.resumen-col .dir { display: block; margin-top: 3px; font-size: 12px; font-style: normal; opacity: 0.85; }
+.sede-btn { position: relative; }
+.sede-btn:not(:nth-child(3n+1))::before {
+  content: ''; position: absolute; left: -1px; top: 12%; bottom: 12%; width: 2px; background: var(--navy);
+}
 
 /* ───────── Paso 2: profesionales ───────── */
-.lista-prof { margin-top: 60px; }
+.lista-prof { margin-top: 28px; }
 .prof-btn {
   width: calc(100% - 20px);
   margin-left: 20px;
@@ -183,25 +192,25 @@ h2 {
   background: transparent;
   border: 0;
   border-bottom: 2px solid var(--linea);
-  padding: 20px 8px 14px 12px;
+  padding: 14px 8px 12px 12px;
   text-align: left;
 }
-.prof-btn strong { display: block; font-size: clamp(18px, 1.5vw, 24px); font-weight: 600; }
+.prof-btn strong { display: block; font-size: clamp(16px, 1.3vw, 20px); font-weight: 600; }
 .prof-btn small { display: block; margin-top: 4px; font-size: 14px; font-weight: 400; }
 .prof-btn:hover { background: rgba(4, 30, 66, 0.05); }
 .chevron { flex: none; }
 
 /* ───────── Paso 3: fecha y hora ───────── */
-.etiqueta { font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+.etiqueta { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
 
 .fecha-hora {
-  margin-top: 54px;
+  margin-top: 26px;
   display: grid;
-  grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
-  gap: 56px;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 40px;
 }
-.columna-horas .etiqueta { font-size: 15px; margin: 4px 0 18px 4px; }
-.columna-fecha .etiqueta { margin: 0 0 18px 0; }
+.columna-horas .etiqueta { font-size: 13px; margin: 4px 0 12px 4px; }
+.columna-fecha .etiqueta { margin: 0 0 12px 0; font-size: 13px; }
 
 .calendario { border-radius: 4px; overflow: hidden; background: #EEE; }
 .calendario-cabecera {
@@ -210,9 +219,9 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 42px;
-  padding: 0 16px;
-  font-size: 18px;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 15px;
 }
 .calendario-cabecera button {
   background: transparent; border: 0; color: #fff; padding: 6px; display: grid; place-items: center;
@@ -222,18 +231,18 @@ h2 {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px 0;
-  padding: 14px 14px 16px;
-  min-height: 213px;
+  padding: 10px 12px 12px;
+  min-height: 200px;
   align-content: start;
 }
 .cal-dow { text-align: center; font-size: 12px; font-weight: 700; color: var(--gris); padding-bottom: 6px; }
 .cal-dia {
   justify-self: center;
-  width: 36px; height: 36px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   border: 0;
   background: transparent;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 .cal-dia:hover:not(:disabled):not(.sel) { background: rgba(4, 30, 66, 0.12); }
@@ -241,7 +250,7 @@ h2 {
 .cal-dia.hoy:not(.sel) { box-shadow: inset 0 0 0 1.5px var(--navy); }
 .cal-dia.sel { background: var(--navy); color: #fff; font-weight: 700; }
 
-.franja { margin-bottom: 18px; }
+.franja { margin-bottom: 10px; }
 .franja-titulo { text-align: right; font-size: 13px; font-weight: 700; padding-right: 22px; margin-bottom: 4px; }
 .franja-grid {
   display: grid;
@@ -249,44 +258,44 @@ h2 {
   gap: 6px 8px;
   border-left: 1.5px solid var(--linea);
   border-top: 1.5px solid var(--linea);
-  padding: 12px 10px 12px 14px;
-  max-height: 188px;
+  padding: 8px 10px 8px 14px;
+  max-height: 132px;
   overflow-y: auto;
 }
 .hora-btn {
   background: transparent;
   border: 0;
   border-radius: 999px;
-  padding: 7px 8px;
-  font-size: 15px;
+  padding: 5px 8px;
+  font-size: 14px;
   font-weight: 400;
 }
 .hora-btn:hover:not(.sel) { background: rgba(4, 30, 66, 0.1); }
 .hora-btn.sel { background: var(--navy); color: #fff; font-weight: 600; }
 
 .tu-cita {
-  margin-top: 34px;
-  padding-top: 24px;
+  margin-top: 20px;
+  padding-top: 14px;
   border-top: 1.5px solid var(--linea);
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
 }
-.tu-cita .etiqueta { font-size: 19px; }
-.tu-cita-valor { font-size: clamp(18px, 1.6vw, 26px); text-align: right; }
+.tu-cita .etiqueta { font-size: 15px; }
+.tu-cita-valor { font-size: clamp(16px, 1.3vw, 21px); text-align: right; }
 .tu-cita-valor strong { font-weight: 700; }
 .tu-cita-valor em { font-style: normal; color: var(--gris); font-size: 0.8em; }
 
 .btn-primario {
   display: block;
-  margin: 28px 0 0 auto;
+  margin: 16px 0 0 auto;
   background: var(--navy);
   color: #fff;
   border: 0;
   border-radius: 999px;
-  padding: 16px 44px;
-  font-size: 16px;
+  padding: 12px 38px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -296,52 +305,52 @@ h2 {
 
 /* ───────── Paso 4: datos ───────── */
 .resumen {
-  margin-top: 40px;
+  margin-top: 22px;
   display: grid;
   grid-template-columns: 1fr 1.4fr 1.1fr;
   background: var(--navy);
   color: #fff;
-  border-radius: 6px 6px 6px 72px;
-  padding: 26px 30px 26px 34px;
+  border-radius: 6px 6px 6px 56px;
+  padding: 18px 24px 18px 30px;
 }
 .resumen-col { padding: 0 22px; border-left: 1px solid rgba(255, 255, 255, 0.35); }
 .resumen-col:first-child { padding-left: 0; border-left: 0; }
 .resumen-col small { display: block; font-size: 12px; font-weight: 500; text-transform: uppercase; opacity: 0.85; margin-bottom: 6px; }
-.resumen-col span { font-size: 18px; line-height: 1.2; display: block; }
+.resumen-col span { font-size: 15px; line-height: 1.2; display: block; }
 .resumen-col b { font-weight: 700; }
 
 .formulario {
-  margin-top: 34px;
+  margin-top: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px 40px;
+  gap: 14px 32px;
   padding-left: 8px;
 }
-.campo { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .campo-completo { grid-column: 1 / -1; }
-.campo label { font-size: 17px; font-weight: 600; }
+.campo label { font-size: 14px; font-weight: 600; }
 .opcional { margin-left: 8px; font-size: 12px; font-weight: 400; text-transform: uppercase; color: var(--gris); }
 .campo input {
-  height: 50px;
+  height: 42px;
   border: 0;
   border-radius: 999px;
   background: var(--campo);
-  padding: 0 22px;
-  font-size: 16px;
+  padding: 0 20px;
+  font-size: 14px;
 }
 .campo input::placeholder { color: #9A9A9A; }
 .campo input:focus { background: #E2E4E8; }
 
-.separador { grid-column: 1 / -1; width: 100%; border: 0; border-top: 1.5px solid var(--linea); margin: 14px 0 0; }
+.separador { grid-column: 1 / -1; width: 100%; border: 0; border-top: 1.5px solid var(--linea); margin: 6px 0 0; }
 .btn-confirmar {
   grid-column: 1 / -1;
-  height: 52px;
-  margin-top: 8px;
+  height: 46px;
+  margin-top: 4px;
   background: var(--navy);
   color: #fff;
   border: 0;
   border-radius: 999px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -364,8 +373,8 @@ h2 {
 /* ───────── Tablet ───────── */
 @media (max-width: 1200px) {
   .sedes-lista { grid-template-columns: repeat(2, auto); margin-left: 24px; }
-  .sede-btn:not(:nth-child(3n+1)) { border-left: 0; }
-  .sede-btn:not(:nth-child(2n+1)) { border-left: 2px solid var(--navy); }
+  .sede-btn:not(:nth-child(3n+1))::before { display: none; }
+  .sede-btn:not(:nth-child(2n+1))::before { display: block; }
 }
 
 /* ───────── Móvil ───────── */
@@ -382,7 +391,8 @@ h2 {
   .acordeon-item, .acordeon-item.abierto { margin-left: 0; margin-right: 0; }
   .acordeon-cabecera { padding-top: 26px; padding-bottom: 26px; }
   .sedes-lista { grid-template-columns: 1fr; margin-left: 12px; }
-  .sede-btn, .sede-btn:not(:nth-child(2n+1)), .sede-btn:not(:nth-child(3n+1)) { border-left: 0; padding: 12px 8px; white-space: normal; }
+  .sede-btn { padding: 12px 14px; white-space: normal; }
+  .sede-btn::before, .sede-btn:not(:nth-child(2n+1))::before, .sede-btn:not(:nth-child(3n+1))::before { display: none; }
 
   .subtitulo { margin-left: 0; }
   .lista-prof { margin-top: 28px; }
